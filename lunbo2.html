@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>轮播</title>
+	<style type="text/css">
+	 body,div,ul,li,a,img{margin:0;padding:0;}
+     ul,li{list-style:none;}
+     a{text-decoration:none;}
+    .banner{width:400px;height:200px;position:relative;overflow: hidden;}
+    .imglist{position:relative;width:1600px;height:200px;}
+    .imglist li{float:left;}
+    .numlist{position:absolute;bottom:10px;left:200px;margin-left:-50px;}
+    .numlist li{float:left;margin-right:5px;width:20px;height:20px;background:black;line-height:20px;text-align:center;}
+    .numlist li.active{background:red;}
+    .numlist li a{color:#fff;}
+    .prev,.next{display:block;position:absolute;width:25px;height:40px;background:rgba(0,0,0,0.8);font-size:30px;font-weight:bold;top:100px;margin-top:-20px;line-height:40px;text-align:center;color:#fff;}
+    .prev,.next:hover{background:rgba(0,0,0,1);}
+    .prev{left:10px;}
+    .next{right:10px;}   
+	</style>
+</head>
+<body>
+   <div class="banner">
+   	   <ul class="imglist">
+   	   	  <li><a href="#"><img src="images/timg1.gif"></a></li>
+   	   	  <li><a href="#"><img src="images/timg2.gif"></a></li>
+   	   	  <li><a href="#"><img src="images/timg3.gif"></a></li>
+   	   	  <li><a href="#"><img src="images/timg5.gif"></a></li>
+   	   </ul>
+       <a href="javascript:;" class="prev"><</a>
+       <a href="javascript:;" class="next">></a>
+   	   <ul class="numlist">
+   	   	<li class="active"><a href="#">1</a></li>
+   	   	<li><a href="#">2</a></li>
+   	   	<li><a href="#">3</a></li>
+   	   	<li><a href="#">4</a></li>
+   	   </ul>
+   </div>
+    <script src="js/jquery.js"></script>
+   	<script type="text/javascript">
+   	$(function(){
+      var curindex=0;
+      var len=$(".imglist li").length;
+      var t=setInterval(function(){
+         if(curindex<len-1){
+          curindex++;
+         }else{
+          curindex=0;
+         }
+         changeTo(curindex);
+      },2500);
+      //左右箭头滑过事件
+      $(".prev").hover(function(){
+        clearInterval(t);
+      },function(){
+         autoChangeAgain();
+      });
+      $(".next").hover(function(){
+        clearInterval(t);
+      },function(){
+         autoChangeAgain();
+      });
+      //左右箭头点击事件
+      $(".prev").click(function(){
+        curindex=(curindex>0) ? (--curindex):(len-1);
+        changeTo(curindex);
+      })
+       $(".next").click(function(){
+        curindex=(curindex<len-1) ? (++curindex):0;
+        changeTo(curindex);
+      })
+     //对右下角按钮index进行事件绑定处理等
+  $(".numlist").find("li").each(function(item){ 
+    $(this).hover(function(){ 
+      clearInterval(t);
+      changeTo(item);
+      curindex = item;
+    },function(){ 
+      autoChangeAgain();
+    });
+  });
+
+  function autoChangeAgain(){ 
+     t = setInterval(function(){ 
+      if(curindex < len-1){ 
+        curindex ++;
+      }else{ 
+        curindex = 0;
+      }
+    //调用变换处理函数
+      changeTo(curindex); 
+    },2500);
+    }
+    function changeTo(num){ 
+    var goLeft = num * 400;
+    $(".imglist").animate({left: "-" + goLeft + "px"},500);
+    $(".numlist").find("li").removeClass("active").eq(num).addClass("active");
+   
+   }
+
+   	 })
+   	</script>
+</body>
+</html>
