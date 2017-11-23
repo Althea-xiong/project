@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="cache-control" content="no-siteapp">
+    <link href="css/bootstrap.css" rel="stylesheet">
+	<title>成都小风车</title>
+	<style type="text/css">
+     body{background:#fff;color:#333;}
+     /*头部菜单导航*/    
+     #header{position:fixed;top:0;left:0;width:100%;height:65px;
+     background-color:#fff;z-index:99999;border-bottom:1px solid #CCC;}	
+     .navbar-default{background:#fff;border:0;padding:0 10px 0 0;}
+     @media (min-width:1200px){
+       #header  .navbar-default .navbar-brand{margin-left:20px;margin-right:20px;width:300px;height:62px;background:url(images/logo.png) no-repeat left center;}
+     }
+      @media (min-width: 100px){
+     .navbar-brand {margin-right: 20px;margin-left: 20px;width: 121px;height: 62px;background: url(images/logo_min.png) no-repeat left center;}
+      }
+     .navbar-default .navbar-nav>li{margin-left:1px;}
+     .navbar-default .navbar-nav>li>a{padding:11px 20px;color:#999;font-size:16px;line-height:42px;transition:0.3s;}
+     .navbar-default .navbar-nav>li.active>a,.navbar-default .navbar-nav>li:hover>a{background-color: #52b6ec !important;color: #fff !important;}     
+      /*幻灯*/
+     #main-slider{background:url(images/ppt_bg.jpg) center 64px no-repeat;height: 831px;overflow: hidden;color: #fff;padding-top:64px;}
+     #main-slider .item:first-child{top:auto;position:relative;}
+     #main-slider .item{transition:opacity ease-in-out 500ms;
+    left:0 !important;opacity:0;top:0;position: absolute;
+    width: 100%;display:block !important;z-index: 1;
+    text-align: center;padding-top: 90px;}
+     #main-slider .item.active {opacity: 1;transition:opacity ease-in-out 500ms;z-index:2;}
+     #main-slider .title{height:178px;}
+     #main-slider h1 {font-size: 40px;text-shadow: 0 3px rgba(0, 0, 0, 0.1);color:#fff;}
+     #main-slider .pic{height:480px;} 
+    #main-slider .prev, #main-slider .next{position: absolute;top: 50%;background-color: rgba(0, 0, 0, 0.3);color:#fff;display: inline-block;margin-top: -50px;font-size: 24px;height:50px;
+    width: 50px;line-height: 50px;text-align: center;z-index:5;}    
+     #main-slider .prev{left:10px;}
+     #main-slider .next{right:10px;}
+     @media (max-width: 768px){
+     #main-slider { height: 220px; background-size: 1000px;}
+     }    
+     @media (max-width: 768px){
+     #main-slider .item {padding-top: 40px;}
+     #main-slider .pic {display: none;}
+     #main-slider .prev,#main-slider .next{display:none;}
+     #main-slider .title h1 {font-size: 26px;}
+     }
+     /*服务*/
+    .box{padding:50px 30px 30px 30px;background:#fff;}
+    .box.first{margin-bottom:70px;}
+    .box .box-title{padding-bottom:80px;text-align:center;}
+    .box .box-title h2{padding: 5px 30px 10px 30px;color:#00b3fd;font-size:30px;}
+    .box .box-title span{display:inline-block;width:80px;height:40px;border-top:2px solid #00b3fd;}
+    .center{text-align:center;}
+    .box .col-md-2dot4 .center i{display:inline-block;width:140px;height:140px;text-align: center;margin-right:10px;}
+    .box .col-md-2dot4 .center i.serve1{background:url(images/serve1.png);margin-bottom:10px;}
+    .box .col-md-2dot4 .center i.serve2{background:url(images/serve2.png);margin-bottom:10px;}
+    .box .col-md-2dot4 .center i.serve3{background:url(images/serve3.png);margin-bottom:10px;}
+    .box .col-md-2dot4 .center i.serve4{background:url(images/serve4.png);margin-bottom:10px;}
+    .box .col-md-2dot4 .center i.serve5{background:url(images/serve5.png);margin-bottom:10px;}
+    .box .col-md-2dot4 .center h4{font-size:22px;}
+     @media (min-width:992px){
+      .col-md-2dot4{width:20%;}
+     }
+     /*产品展示*/
+     #prodisplay,#prodisplay .box{background:#f1f5f8;}
+     .prodisplay-item .item-inner{padding:10px;background:#fff;border-bottom:1px solid #e1e1e1;margin-bottom:20px;}
+     .item-inner .item-imag{margin-bottom:10px;position:relative;}
+     .item-inner .item-imag .imag-over{position:absolute;top:0;left:0;
+      background:rgba(255,255,255,0.4);width:100%;height:100%;opacity: 0;transition:0.3s;}
+      .item-inner .item-imag:hover .imag-over{opacity:1;}
+      .imag-over .over{width:100%;height:100%;position:absolute;top:0;}
+     .prodisplay-item img{width:100%;}
+     .prodisplay-item .item-inner span{display:block;font-size:16px;color:#374552;}
+     .prodisplay-item .item-inner i{font-size:14px;color:#a0a9b2;}
+     /*我们的客户*/
+     #clients{padding-bottom:50px;}
+     .client-box{background:#f1f5f8;height:86px;border:1px solid #eaeef1;text-align:center;padding-top:13px;margin-bottom:20px;}
+     .client-box:hover img{opacity:0.8;}
+     /*关于我们*/
+     #aboutus{background:url(images/about_bg.jpg) no-repeat 50% 50%;height:640px;}
+     #aboutus .box{background:none;}
+     #aboutus .box .box-title h2{color:#fff;}
+     #aboutus .box .box-title span{border-color:#77d2f7;}
+      #aboutus .box .box-title p{color:#fff;font-size:16px;line-height:40px;}
+      /*联系我们*/
+      #contactus{background:url(images/content_bg.png) repeat-x 50% 50%;background-color: #626160;}
+      #contactus .box{background:none;}
+      #contactus .box i{display:inline-block;width:80px;height:70px;}
+      #contactus .box .tel{background:url(images/content_tel.png);}
+      #contactus .box .add{background:url(images/content_ad.png);}
+      #contactus .box .email{background:url(images/content_em.png);}
+      #contactus .box  h4{color:#fff;font-size:16px;}
+      /*底部*/
+      #footer{text-align:center;font-size:16px;padding:35px 0;color: #a4a7b1;}
+	</style>
+</head>
+<body data-spy="scroll" data-target="#navbar" >
+<!-- 头部菜单 -->
+<div id="header">
+	<div class="container">
+		<nav class="navbar navbar-default" id="navbar">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand"></a>
+			</div>
+			<div class="navbar-collapse collapse" id="menu">
+				<ul class="nav navbar-nav navbar-right">
+					<li class="active">
+					 <a href="#main-slider">
+					 	<i class="glyphicon glyphicon-home"></i>
+					 	网站首页
+					 </a>
+					</li>
+					<li><a href="#services">服务与支持</a></li>
+					<li><a href="#prodisplay">产品展示</a></li>
+					<li><a href="#clients">客户</a></li>
+					<li><a href="#aboutus">关于我们</a></li>
+					<li class="dropdown">
+					  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+					  	<img src="images/logo_msg.png" width="38" height="37">
+					  </a>
+					  <ul class="dropdown-menu">
+					  	<li><a><img src="images/Quickmark.png"></a></li>
+					  </ul>
+					 </li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+</div>
+<!-- 头部菜单 -->
+<!-- 幻灯片 -->
+<div id="main-slider" class="carousel">
+  <div class="carousel-inner">
+    <div class="item active">
+      <div class="container">
+      	<div class="carousel-content">
+      		<div class="title">
+      			<h1>认真做事，小而美！ Small and beautiful!</h1>
+      		</div>
+      		<div class="pic">
+      			<img src="images/ppt3.jpg">
+      		</div>
+      	</div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="container">
+      	<div class="carousel-content">
+      		<div class="title">
+      			<h1>自主软件研发、大数据、金融服务、IT技术培训。</h1>
+      		</div>
+      		<div class="pic">
+      			<img src="images/ppt1.jpg">
+      		</div>
+      	</div>
+      </div>
+    </div>
+  </div>
+  <a class="prev" href="#main-slider"  data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+  </a>
+  <a class="next" href="#main-slider" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" ></span>
+  </a>
+</div>
+<!-- 幻灯片 -->
+<!-- 服务 -->
+<div id="services">
+  <div class="container">
+     <div class="box first">
+         <div class="box-title">
+           <h2>服务与支持</h2>
+           <span></span>
+         </div>
+         <div class="row">
+           <div class="col-md-2dot4 col-sm-6">
+             <div class="center">
+               <i class="serve1"></i>
+               <h4>系统集成</h4>
+               <p>
+                 低成本的、高效率的
+                 <br>
+                   性能匀称的
+                 <br>
+                 可扩充性、可维护
+               </p>
+             </div>
+           </div>
+           <div class="col-md-2dot4 col-sm-6">
+             <div class="center">
+               <i class="serve2"></i>
+               <h4>APP应用开发</h4>
+               <p>
+                 iOS、Andriod
+                 <br>
+                   抢占商机、清新美观
+                 <br>
+                体验感强、成本低廉
+               </p>
+             </div>
+           </div>
+           <div class="col-md-2dot4 col-sm-6">
+             <div class="center">
+               <i class="serve3"></i>
+               <h4>网站开发</h4>
+               <p>
+                 HTML5+CSS3+JAVA(PHP)
+                 <br>
+                   美观大方，完美体验
+                 <br>
+                 安全性能高
+               </p>
+             </div>
+           </div>
+           <div class="col-md-2dot4 col-sm-6">
+             <div class="center">
+               <i class="serve4"></i>
+               <h4>企业应用</h4>
+               <p>
+                 功能全面，界面美观
+                 <br>
+                   安全性能高
+                 <br>
+                 无缝对接的后期维护
+               </p>
+             </div>
+           </div>
+           <div class="col-md-2dot4 col-sm-6">
+             <div class="center">
+               <i class="serve5"></i>
+               <h4>CRM</h4>
+               <p>
+                 客户资源、客户关系
+                 <br>
+                   客户数据
+                 <br>
+                 客户关怀等管理维护
+               </p>
+             </div>
+           </div>
+         </div>
+     </div>
+  </div>
+</div>
+<!-- 服务 -->
+<!-- 产品展示 -->
+<div id="prodisplay">
+  <div class="container">
+    <div class="box">
+      <div class="box-title">
+        <h2>产品展示</h2>
+        <span></span>
+      </div>
+      <div class="row">
+        <div class="col-md-4 col-sm-6 prodisplay-item">
+          <div class="item-inner">
+            <div class="item-imag">
+              <img src="images/product_app1.png">
+              <div class="imag-over">
+                <a href="javascript:;" class="over"></a>
+              </div>
+            </div>
+            <span>爱鲜生</span>
+            <i>电商APP应用开发</i>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6 prodisplay-item">
+          <div class="item-inner">
+            <div class="item-imag">
+              <img src="images/product_com4.jpg">
+              <div class="imag-over">
+                <a href="javascript:;" class="over"></a>
+              </div>
+            </div>
+            <span>温江规划局</span>
+            <i>政府应用开发</i>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6 prodisplay-item">
+          <div class="item-inner">
+            <div class="item-imag">
+              <img src="images/product_com2.png">
+              <div class="imag-over">
+                <a href="javascript:;" class="over"></a>
+              </div>
+            </div>
+            <span>销售助手管理平台</span>
+            <i>运营商应用开发</i>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6 prodisplay-item">
+          <div class="item-inner">
+            <div class="item-imag">
+              <img src="images/product_com5.jpg">
+              <div class="imag-over">
+                <a href="javascript:;" class="over"></a>
+              </div>
+            </div>
+            <span>雅安科技馆</span>
+            <i>网站/微信/呼叫中心建设</i>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6 prodisplay-item">
+          <div class="item-inner">
+            <div class="item-imag">
+              <img src="images/product_web3.png">
+              <div class="imag-over">
+                <a href="javascript:;" class="over"></a>
+              </div>
+            </div>
+            <span>中丹环保环保管家系统</span>
+            <i>一站式环保综合服务平台</i>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6 prodisplay-item">
+          <div class="item-inner">
+            <div class="item-imag">
+              <img src="images/product_we1.png">
+              <div class="imag-over">
+                <a href="javascript:;" class="over"></a>
+              </div>
+            </div>
+            <span>国网乐山人资互动平台</span>
+            <i>微信公众号</i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 产品展示 -->
+<!-- 我们的客户 -->
+<div id="clients">
+   <div class="container">
+     <div class="box">
+       <div class="box-title">
+        <h2>我们的客户</h2>
+        <span></span>
+       </div>
+       <div class="row">
+         <div class="col-sm-6 col-md-3">
+           <div class="client-box">
+             <a href="javascript:;">
+               <img src="images/client2.png">
+             </a>
+           </div>
+         </div>
+         <div class="col-sm-6 col-md-3">
+           <div class="client-box">
+             <a href="javascript:;">
+               <img src="images/client7.png">
+             </a>
+           </div>
+         </div>
+         <div class="col-sm-6 col-md-3">
+           <div class="client-box">
+             <a href="javascript:;">
+               <img src="images/client6.png">
+             </a>
+           </div>
+         </div>
+         <div class="col-sm-6 col-md-3">
+           <div class="client-box">
+             <a href="javascript:;">
+               <img src="images/client5.png">
+             </a>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+</div>
+<!-- 我们的客户 -->
+<!-- 关于我们 -->
+<div id="aboutus">
+  <div class="container">
+    <div class="box">
+      <div class="box-title">
+        <h2>关于我们</h2>
+        <span></span>
+        <p>以客户需求为导向，以客户价值为目标，以客户满意为标准<br>
+坚持变革，倡导创新，持续成长。 快速反应，快速决策，快速行动<br>
+企业与员工共同成长， 专注主营业务。</p>
+       </div>
+    </div>
+  </div>
+</div>
+<!-- 关于我们 -->
+<!-- 联系我们 -->
+<div id="contactus">
+  <div class="container">
+    <div class="box">
+      <div class="row">
+      <div class="col-md-4 col-sm-6">
+         <div class="center">
+          <i class="tel"></i>
+          <h4>电话：028-67871837</h4>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-6">
+         <div class="center">
+          <i class="add"></i>
+          <h4>地址：成都市高新区菁蓉国际广场4栋5楼A15</h4>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-6">
+         <div class="center">
+          <i class="email"></i>         
+          <h4>邮箱：kefu@xfc123.com</h4>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 联系我们 -->
+<!-- 底部 -->
+<div id="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        Copyright © 2017 Xiaofengche Inc. 保留所有权利。   蜀ICP备15020376号-1
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 底部 -->
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.js"></script>	
+</body>
+</html>
